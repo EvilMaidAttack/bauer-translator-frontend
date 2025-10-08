@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-image: url("/piston_logo.svg");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 100vw 130vh;
+    background-position-x: -34.5vw;
+    background-position-y: 30vh;
+    background-color: #f2f2f2;
+}
+

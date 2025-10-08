@@ -1,0 +1,82 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h4 mb-4">Bauer Document Translator</h1>
+
+          <!-- Drop Area -->
+          <div
+            class="dropzone mb-3"
+            [class.dragging]="isDragging()"
+            (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)"
+            (drop)="onDrop($event)"
+          >
+            <div class="text-center">
+              <i class="bi bi-cloud-arrow-up fs-1 d-block mb-2"></i>
+              <p class="mb-2 fw-semibold">Drag & drop your document here</p>
+              <p class="text-muted small mb-3">or</p>
+              <label class="btn btn-outline-primary btn-sm">
+                Choose file
+                <input
+                  #fileInput
+                  type="file"
+                  class="d-none"
+                  [attr.accept]="accept"
+                  (change)="onFileInputChange(fileInput)"
+                />
+              </label>
+              <p class="text-muted mt-3 small">
+                Supported: PDF, DOC/DOCX, RTF, ODT, TXT, PPT/PPTX, XLS/XLSX
+              </p>
+            </div>
+          </div>
+
+          <!-- Selected file preview -->
+           @if (file()) {
+            <div class="alert alert-light border d-flex justify-content-between align-items-center">
+            <div class="me-3">
+              <i class="bi bi-file-earmark-text me-2"></i>
+              <strong>{{ file()?.name }}</strong>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="removeFile()">
+              Remove
+            </button>
+          </div>
+           }
+
+          <!-- Form Controls -->
+          <form [formGroup]="form" (ngSubmit)="confirm()" class="row gy-3 mt-2">
+            <div class="col-12">
+              <label for="targetLang" class="form-label">Target language</label>
+              <select id="targetLang" class="form-select" formControlName="targetLang">
+                <option value="" disabled>Select language</option>
+                @for (l of languages; track l.code ){
+                  <option [value]="l.code">
+                    {{l.label}} {{l.code}}
+                  </option>
+                }
+              </select>
+              @if (form.controls.targetLang.invalid && form.controls.targetLang.touched){
+                <div class="form-text">
+                  Please select a target language.
+                </div>
+              }
+            </div>
+
+            <div class="col-12 d-flex justify-content-end">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!form.valid || !file()"
+              >
+                Confirm
+              </button>
+            </div>
+          </form>
+        </div> <!-- /card-body -->
+      </div> <!-- /card -->
+    </div>
+  </div>
+</div>

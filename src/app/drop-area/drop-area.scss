@@ -1,0 +1,15 @@
+.dropzone {
+  border: 2px dashed #ced4da;
+  border-radius: .5rem;
+  padding: 2.5rem 1rem;
+  transition: border-color .15s ease, background-color .15s ease;
+
+  &.dragging {
+    background-color: #f8f9fa;
+    border-color: #86b7fe;
+  }
+}
+
+.bi {
+  vertical-align: -.125em;
+}
