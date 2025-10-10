@@ -7,13 +7,15 @@ export type TranslationJob = {
   filename: string;
   target_lang: string;
   source_blob_url: string;
-  target_container_url: string; // eigentlich Blob-URL
+  target_container_url: string;
   operation_location: string;
   status: 'notStarted'|'running'|'succeeded'|'failed'|'canceled';
   error_message: string;
   created_at: string;
   updated_at: string;
-  download_url?: string|null; // vom Serializer, wenn succeeded
+  display_status: string;
+  target_name: string; // vom Serializer;
+  download_url?: string|null; // vom Serializer, wenn succeeded;
 };
 
 @Injectable({

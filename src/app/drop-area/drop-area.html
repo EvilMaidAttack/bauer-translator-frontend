@@ -89,7 +89,7 @@
               >
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
-                    <strong>Status:</strong> {{ job()?.status }}
+                    <strong>Status:</strong> {{ job()?.display_status }}
                     @if (job()?.error_message) {
                       <div class="small text-danger mt-1">{{ job()?.error_message }}</div>
                     }
@@ -102,7 +102,7 @@
                 @if (job()?.status==='succeeded' && job()?.download_url) {
                   <div class="mt-2">
                     <a class="btn btn-sm btn-success" [href]="job()?.download_url" target="_blank" rel="noopener">
-                      <i class="bi bi-download me-1"></i> Download "{{ job()?.filename }}"
+                      <i class="bi bi-download me-1"></i> Download "{{ job()?.target_name }}"
                     </a>
                   </div>
                 }
