@@ -1,0 +1,9 @@
+.lang-select { position: relative; }
+.dropdown-menu {
+  display: block;          // Bootstrap 'show' erzwingt Sichtbarkeit, hier safe
+  position: absolute;
+  inset: auto 0 auto 0;    // volle Breite unter dem Input
+  max-height: 280px;
+  overflow: auto;
+  z-index: 1000;
+}

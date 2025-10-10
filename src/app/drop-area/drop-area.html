@@ -49,19 +49,16 @@
           <!-- Form Controls -->
           <form [formGroup]="form" (ngSubmit)="confirm()" class="row gy-3 mt-2">
             <div class="col-12">
-              <label for="targetLang" class="form-label">Target language</label>
-              <select id="targetLang" class="form-select" formControlName="targetLang">
-                <option value="" disabled>Select language</option>
-                @for (l of languages; track l.code ){
-                  <option [value]="l.code">
-                    {{l.label}} {{l.code}}
-                  </option>
-                }
-              </select>
-              @if (form.controls.targetLang.invalid && form.controls.targetLang.touched){
-                <div class="form-text">
-                  Please select a target language.
-                </div>
+              <label class="form-label">Target language</label>
+
+              <app-language-select
+                formControlName="targetLang"
+                [options]="languages"
+                placeholder="Search languages…">
+              </app-language-select>
+
+              @if (form.controls.targetLang.invalid && form.controls.targetLang.touched) {
+                <div class="form-text">Please select a target language.</div>
               }
             </div>
 

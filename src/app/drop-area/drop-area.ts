@@ -1,26 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslatorService, TranslationJob } from '../services/translator';
-
-type LangOption = { code: string; label: string };
+import { TranslatorService, TranslationJob, LangOption } from '../services/translator';
+import { LanguageSelect } from '../language-select/language-select';
 
 @Component({
   selector: 'app-drop-area',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LanguageSelect],
   templateUrl: './drop-area.html',
   styleUrl: './drop-area.scss'
 })
 export class DropArea {
-  readonly languages: LangOption[] = [
-    { code: 'EN', label: 'English' },
-    { code: 'DE', label: 'German' },
-    { code: 'FR', label: 'French' },
-    { code: 'ES', label: 'Spanish' },
-    { code: 'IT', label: 'Italian' },
-    { code: 'NL', label: 'Dutch' },
-    { code: 'PL', label: 'Polish' }
-  ];
+  languages: LangOption[] = []
 
   form: any;
   
@@ -43,6 +34,7 @@ export class DropArea {
     this.form = this.fb.group({
       targetLang: ['', Validators.required]
     });
+    this.translatorService.getLanguages().subscribe(languages => this.languages = languages);
   }
 
   // Handle dropzone drag events

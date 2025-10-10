@@ -1,0 +1,54 @@
+<div class="lang-select">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      [placeholder]="placeholder"
+      [formControl]="query"
+      [disabled]="disabled"
+      (focus)="focusInput()"
+      (input)="open = true"
+      autocomplete="off"
+    />
+
+    <!-- Optional: small selected pill when dropdown is closed and a value exists -->
+    @if (!open && isSelectedCode) {
+      <span class="input-group-text selected-pill">
+        {{ isSelectedCode }}
+      </span>
+    }
+
+    <button
+      class="btn btn-outline-secondary dropdown-toggle"
+      type="button"
+      (click)="toggle()"
+      [disabled]="disabled">
+    </button>
+  </div>
+
+  @if (open) {
+    <div class="dropdown-menu show w-100 mt-1">
+      @if (filtered.length === 0) {
+        <div class="px-3 py-2 small text-muted">No results</div>
+      }
+
+      @for (o of filtered; track o.code) {
+        <button
+          class="dropdown-item d-flex justify-content-between"
+          type="button"
+          (click)="selectOption(o)"
+          [class.active]="o.code === isSelectedCode"
+          [attr.aria-selected]="o.code === isSelectedCode"
+        >
+        <span>
+            {{ o.name }}
+            <span class="text-muted small ms-2">{{ o.code }}</span>
+        </span>
+        @if (o.code === isSelectedCode) {
+            <i class="bi bi-check2 fw-bold"></i>
+        }
+        </button>
+      }
+    </div>
+  }
+</div>

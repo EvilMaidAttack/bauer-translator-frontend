@@ -18,6 +18,12 @@ export type TranslationJob = {
   download_url?: string|null; // vom Serializer, wenn succeeded;
 };
 
+export type LangOption = {
+  code: string;
+  name: string;
+};
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +50,10 @@ export class TranslatorService {
       switchMap(() => this.getStatus(jobId)),
       takeWhile(j => !['succeeded', 'failed', 'canceled'].includes(j.status), true)
     );
+  }
+
+  getLanguages(): Observable<LangOption[]> {
+    return this.http.get<LangOption[]>(this.baseUrl + "languages/")
   }
   
 }
