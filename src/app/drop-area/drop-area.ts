@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslatorService } from '../services/translator';
+import { TranslatorService, TranslationJob } from '../services/translator';
 
 type LangOption = { code: string; label: string };
 
@@ -32,6 +32,9 @@ export class DropArea {
   // Selected file state
   private _file = signal<File | null>(null);
   file = computed(() => this._file());
+
+  job = signal<TranslationJob | null>(null);
+  isLoading = signal(false);
   
   constructor(private fb: FormBuilder, private translatorService: TranslatorService) {}
   
@@ -97,14 +100,21 @@ export class DropArea {
       const formData = new FormData();
       formData.append('file', this.file()!);
       formData.append('target_lang', this.form.value.targetLang); 
-      console.log(formData);
       
+      this.isLoading.set(true);
       this.translatorService.translateFile(formData).subscribe({
-        next: (response) => {
-          console.log('Translation job successfully created:', response);
+        next: (job) => {
+          console.log('Translation job successfully created:', job);
+          this.job.set(job);
+          // Start polling the job status
+          this.translatorService.pollJob(job.id).subscribe({
+            next: (updatedJob) => this.job.set(updatedJob),
+            complete: () => this.isLoading.set(false),
+          });
         },
         error: (error) => {
           console.error('Error creating translation job:', error);
+          this.isLoading.set(false);
         }
       });
 
