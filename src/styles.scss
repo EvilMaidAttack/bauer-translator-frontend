@@ -1,3 +1,8 @@
+:root {
+  /* adjust if your navbar is taller */
+  --header-h: 120px; 
+}
+
 html {
     height: 100%;
     width: 100%;
@@ -11,5 +16,11 @@ body {
     background-position-x: -34.5vw;
     background-position-y: 30vh;
     background-color: #f2f2f2;
+}
+
+
+.min-vh-minus-header {
+  /* dvh handles mobile browser chrome better than vh */
+  min-height: calc(100dvh - var(--header-h));
 }
 

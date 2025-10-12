@@ -44,8 +44,15 @@ export class Login {
 
     this.auth.login(
       credentials,
-      () => this.performRouting(),
-      () => console.log("Login failed! Please try again.") 
+      () => {
+        this.loading = false;
+        this.performRouting();
+      },
+      () => {
+        this.loading = false;
+        console.log("Login failed! Please try again.")
+        this.error = "Incorrect credentials. Please try again.";
+      } 
     )
   }
 
