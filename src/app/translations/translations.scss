@@ -6,3 +6,16 @@
   cursor: pointer;
 }
 
+.alert-danger .btn-outline-light {
+  color: #842029; /* same tone as Bootstrap's alert-danger text */
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.alert-danger .btn-outline-light:hover {
+  color: #5c0f17;
+  text-decoration: none;
+  background-color: rgba(109, 4, 4, 0.378);
+}
+
+

@@ -16,6 +16,7 @@ export type TranslationJob = {
   updated_at: string;
   display_status: string;
   target_name: string; // vom Serializer;
+  download_expires_at: string | null;
   download_url?: string|null; // vom Serializer, wenn succeeded;
 };
 
