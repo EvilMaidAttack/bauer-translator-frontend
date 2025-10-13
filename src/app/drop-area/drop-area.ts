@@ -3,10 +3,11 @@ import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatorService, TranslationJob, LangOption } from '../services/translator';
 import { LanguageSelect } from '../language-select/language-select';
+import { Translations } from '../translations/translations';
 
 @Component({
   selector: 'app-drop-area',
-  imports: [CommonModule, ReactiveFormsModule, LanguageSelect],
+  imports: [CommonModule, ReactiveFormsModule, LanguageSelect, Translations],
   templateUrl: './drop-area.html',
   styleUrl: './drop-area.scss'
 })

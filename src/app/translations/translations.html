@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Recent translations</span>
+        <div class="">
+            <i class="bi bi-arrow-clockwise clickable me-2" (click)="refresh()"></i>
+            <i class="bi clickable" [class.bi-caret-up-fill]="isExpanded()" [class.bi-caret-down-fill]="!isExpanded()" (click)="toggleList()"></i>
+        </div>
+    </div>
+    @if(isExpanded()) {
+        <ul 
+            class="list-group list-group-flush"
+        >
+            @for (translation of translations; track translation.id){
+                <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                    <span>{{translation.target_name}} </span>
+                    <a class="btn btn-sm btn-success" [href]="translation.download_url" target="_blank" rel="noopener">
+                      <i class="bi bi-download me-1"></i> 
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>

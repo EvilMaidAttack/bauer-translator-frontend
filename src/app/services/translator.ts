@@ -6,6 +6,7 @@ export type TranslationJob = {
   id: string;
   filename: string;
   target_lang: string;
+  profile: number;
   source_blob_url: string;
   target_container_url: string;
   operation_location: string;
@@ -36,8 +37,8 @@ export class TranslatorService {
     return this.http.post<TranslationJob>(this.baseUrl + "translate/", formData);
   }
 
-  listJobs(): Observable<TranslationJob> {
-    return this.http.get<TranslationJob>(this.baseUrl + "translate/");
+  listJobs(): Observable<TranslationJob[]> {
+    return this.http.get<TranslationJob[]>(this.baseUrl + "translate/");
   }
 
   getStatus(jobId: string): Observable<TranslationJob> {
