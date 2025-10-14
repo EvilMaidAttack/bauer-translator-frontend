@@ -5,6 +5,11 @@ import { TranslatorService, TranslationJob, LangOption } from '../services/trans
 import { LanguageSelect } from '../language-select/language-select';
 import { Translations } from '../translations/translations';
 
+/**
+ * Todo:
+ * 1. Disable Confirm while translation is in progress
+ */
+
 @Component({
   selector: 'app-drop-area',
   imports: [CommonModule, ReactiveFormsModule, LanguageSelect, Translations],
