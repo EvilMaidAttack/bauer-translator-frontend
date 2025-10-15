@@ -30,7 +30,7 @@ export type LangOption = {
   providedIn: 'root',
 })
 export class TranslatorService {
-  private readonly baseUrl = 'http://localhost:8000/api/';
+  private readonly baseUrl = 'https://b-translator-prod.azurewebsites.net/api/';
 
   constructor(private http: HttpClient) { }
 
