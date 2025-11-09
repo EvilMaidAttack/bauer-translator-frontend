@@ -1,20 +1,38 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss'
 })
 export class Navigation {
-  auth = inject(AuthService)
+  auth = inject(AuthService);
   router = inject(Router);
 
-  logout(){
+  activeLeft = 0;
+  activeWidth = 0;
+
+  logout() {
     this.auth.logout();
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 
+  setActive(link: ElementRef) {
+    const el = link.nativeElement as HTMLElement;
+    this.activeLeft = el.offsetLeft;
+    this.activeWidth = el.offsetWidth;
+  }
+
+  // Optional: set initial pill position when route loads
+  ngAfterViewInit() {
+    const active = document.querySelector('.nav-link.active') as HTMLElement;
+    if (active) {
+      this.activeLeft = active.offsetLeft;
+      this.activeWidth = active.offsetWidth;
+    }
+  }
 }

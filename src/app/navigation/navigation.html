@@ -5,10 +5,36 @@
       <img src="/bkm.svg" class="logo me-2" alt="Logo" />
     </a>
 
+    <!-- Left navigation links -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-nav">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/translate"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="bi bi-translate me-1"></i>
+          Translation
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/redact"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="bi bi-pencil-square me-1"></i>
+          Redaction
+        </a>
+      </li>
+    </ul>
+
     <!-- Right Side -->
     <div class="d-flex ms-auto align-items-center">
-      <button 
-        class="btn btn-outline-danger btn-icon d-flex align-items-center"
+      <button
+        class="btn btn-logout d-flex align-items-center"
         (click)="logout()"
         title="Logout"
       >

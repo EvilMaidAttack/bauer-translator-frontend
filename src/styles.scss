@@ -24,3 +24,20 @@ body {
   min-height: calc(100dvh - var(--header-h));
 }
 
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;        // larger badge
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background-color: #0d6efd;  // Bootstrap primary blue
+  color: #fff;          // white icon
+  font-size: 1.25rem;   // make the icon itself larger
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s ease;
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+

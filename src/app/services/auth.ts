@@ -16,7 +16,8 @@ export type AuthToken = {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly baseUrl = "https://b-translator-prod.azurewebsites.net/auth/";
+  //private readonly baseUrl = "https://b-translator-prod.azurewebsites.net/auth/";
+  private readonly baseUrl = "http://localhost:8000/auth/";
   private _token = signal<string | null>(localStorage.getItem('access'));
 
   constructor(private http: HttpClient){}

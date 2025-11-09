@@ -5,9 +5,9 @@
         <div class="card-body p-4">
           <div class="d-flex align-items-center mb-4">
             <span class="icon-badge me-2">
-            <i class="bi bi-translate"></i>
+            <i class="bi bi-pencil-square"></i>
             </span>
-            <h1 class="h4 mb-0">Bauer Document Translator</h1>
+            <h1 class="h4 mb-0">Bauer Document Redactor</h1>
           </div>
 
           <!-- Drop Area -->
@@ -39,31 +39,42 @@
           </div>
 
           <!-- Selected file preview -->
-           @if (file()) {
-            <div class="alert alert-light border d-flex justify-content-between align-items-center">
-            <div class="me-3">
-              <i class="bi bi-file-earmark-text me-2"></i>
-              <strong>{{ file()?.name }}</strong>
+          @if (file()) {
+            <div
+              class="alert alert-light border d-flex justify-content-between align-items-center"
+            >
+              <div class="me-3">
+                <i class="bi bi-file-earmark-text me-2"></i>
+                <strong>{{ file()?.name }}</strong>
+              </div>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                (click)="removeFile()"
+              >
+                Remove
+              </button>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="removeFile()">
-              Remove
-            </button>
-          </div>
-           }
+          }
 
           <!-- Form Controls -->
-          <form [formGroup]="form" (ngSubmit)="confirm()" class="row gy-3 mt-2">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="confirm()"
+            class="row gy-3 mt-2"
+          >
             <div class="col-12">
-              <label class="form-label">Target language</label>
+              <label class="form-label">Document language</label>
 
               <app-language-select
-                formControlName="targetLang"
+                formControlName="documentLang"
                 [options]="languages"
-                placeholder="Search languages…">
-              </app-language-select>
+                placeholder="Search languages…"
+              ></app-language-select>
 
-              @if (form.controls.targetLang.invalid && form.controls.targetLang.touched) {
-                <div class="form-text">Please select a target language.</div>
+              @if (form.controls.documentLang.invalid &&
+              form.controls.documentLang.touched) {
+                <div class="form-text">Please select a source document language.</div>
               }
             </div>
 
@@ -84,40 +95,56 @@
               <div
                 class="alert"
                 [ngClass]="{
-                  'alert-info': job()?.status==='running' || job()?.status==='notStarted',
-                  'alert-success': job()?.status==='succeeded',
-                  'alert-danger': job()?.status==='failed' || job()?.status==='canceled'
+                  'alert-info':
+                    job()?.status === 'running' || job()?.status === 'notStarted',
+                  'alert-success': job()?.status === 'succeeded',
+                  'alert-danger':
+                    job()?.status === 'failed' || job()?.status === 'canceled'
                 }"
               >
-                <div class="d-flex align-items-center justify-content-between">
+                <div
+                  class="d-flex align-items-center justify-content-between"
+                >
                   <div>
                     <strong>Status:</strong> {{ job()?.display_status }}
                     @if (job()?.error_message) {
-                      <div class="small text-danger mt-1">{{ job()?.error_message }}</div>
+                      <div class="small text-danger mt-1">
+                        {{ job()?.error_message }}
+                      </div>
                     }
                   </div>
                   @if (isLoading()) {
-                    <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
+                    <div
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></div>
                   }
                 </div>
 
-                @if (job()?.status==='succeeded' && job()?.download_url) {
+                @if (job()?.status === 'succeeded' && job()?.download_url) {
                   <div class="mt-2">
-                    <a class="btn btn-sm btn-success" [href]="job()?.download_url" target="_blank" rel="noopener">
-                      <i class="bi bi-download me-1"></i> Download "{{ job()?.target_name }}"
+                    <a
+                      class="btn btn-sm btn-success"
+                      [href]="job()?.download_url"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <i class="bi bi-download me-1"></i> Download redacted
+                      document
                     </a>
                   </div>
                 }
               </div>
             </div>
           }
-
-        </div> <!-- /card-body -->
-      </div> <!-- /card -->
+        </div>
+      </div>
     </div>
+
     <div class="col-12 col-lg-8 pt-2">
-      <app-translations></app-translations>
+      <!-- später -->
+      <!-- <app-redactions></app-redactions> -->
     </div>
   </div>
 </div>
-
