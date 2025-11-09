@@ -3,10 +3,11 @@ import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {  RedactionJob, LangOption, RedactService } from '../services/redact.service';
 import { LanguageSelect } from '../language-select/language-select';
+import { Redactions } from '../redactions/redactions';
 
 @Component({
   selector: 'app-drop-area-redaction',
-  imports: [CommonModule, ReactiveFormsModule, LanguageSelect],
+  imports: [CommonModule, ReactiveFormsModule, LanguageSelect, Redactions],
   templateUrl: './redact.html',
   styleUrl: './redact.scss'
 })

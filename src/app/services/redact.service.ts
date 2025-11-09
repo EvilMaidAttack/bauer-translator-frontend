@@ -13,6 +13,7 @@ export interface RedactionJob {
   display_status: string;
   error_message?: string;
   download_url?: string;
+  download_expires_at?: string | null;
   target_name?: string;
 }
 
@@ -43,6 +44,10 @@ export class RedactService {
       switchMap(() => this.getStatus(jobId)),
       takeWhile(j => !['succeeded', 'failed', 'canceled'].includes(j.status), true)
     );
+  }
+
+  getJobs(): Observable<RedactionJob[]> {
+    return this.http.get<RedactionJob[]>(this.baseUrl + "redact/");
   }
 
   

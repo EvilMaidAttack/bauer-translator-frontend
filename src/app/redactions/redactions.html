@@ -1,1 +1,81 @@
-<p>redactions works!</p>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Recent redactions</span>
+    <div>
+      <i class="bi bi-arrow-clockwise clickable me-2" (click)="refresh()"></i>
+      <i
+        class="bi clickable"
+        [class.bi-caret-up-fill]="isExpanded()"
+        [class.bi-caret-down-fill]="!isExpanded()"
+        (click)="toggleList()"
+      ></i>
+    </div>
+  </div>
+
+  <!-- Error -->
+  @if (error) {
+    <div
+      class="alert alert-danger m-3 d-flex justify-content-between align-items-center"
+      role="alert"
+      aria-live="polite"
+    >
+      <span>{{ error }}</span>
+      <button
+        class="btn btn-outline-light btn-sm border-0 opacity-75"
+        (click)="refresh()"
+      >
+        Retry
+      </button>
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (loading && !error) {
+    <div class="m-3 text-muted small d-flex align-items-center gap-2">
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Loading…
+    </div>
+  }
+
+  <!-- Redaction list -->
+  @if (isExpanded()) {
+    <ul class="list-group list-group-flush">
+      @for (job of redactions; track job.id) {
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <div class="text-truncate">
+            <span class="fw-semibold">{{ job.target_name }}</span>
+            @if (job.download_expires_at) {
+              <span class="text-muted small ms-2">
+                (expires {{ job.download_expires_at | date: 'medium' }})
+              </span>
+            }
+          </div>
+
+          @if (!isExpired(job) && job.download_url) {
+            <a
+              class="btn btn-sm btn-success"
+              [href]="job.download_url"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="bi bi-download me-1"></i>
+            </a>
+          } @else {
+            <span
+              class="badge text-bg-danger d-inline-flex align-items-center"
+              [attr.title]="expiryTooltip(job)"
+            >
+              <i class="bi bi-exclamation-triangle-fill me-1"></i> Expired
+            </span>
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>
