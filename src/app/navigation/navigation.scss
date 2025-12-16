@@ -6,6 +6,21 @@
   margin-left: 16px;
 }
 
+.custom-navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb; /* subtle separation */
+}
+
+.user-email {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #495057;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+
+
 /* --- Navigation Links --- */
 .main-nav {
   margin-left: 1.5rem; /* space between logo and first link */

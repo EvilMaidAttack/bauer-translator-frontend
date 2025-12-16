@@ -1,46 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg navbar-light shadow custom-navbar">
   <div class="container-fluid">
     <!-- Brand / Logo -->
     <a class="navbar-brand d-flex align-items-center" routerLink="/">
       <img src="/bkm.svg" class="logo me-2" alt="Logo" />
     </a>
 
-    <!-- Left navigation links -->
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-nav">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/translate"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <i class="bi bi-translate me-1"></i>
-          Translation
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/redact"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <i class="bi bi-pencil-square me-1"></i>
-          Redaction
-        </a>
-      </li>
-    </ul>
+    @if(auth.isAuthenticated()){
+      <!-- Left navigation links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/translate"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i class="bi bi-translate me-1"></i>
+            Translation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/redact"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i class="bi bi-pencil-square me-1"></i>
+            Redaction
+          </a>
+        </li>
+      </ul>
+    }
 
     <!-- Right Side -->
     <div class="d-flex ms-auto align-items-center">
-      <button
-        class="btn btn-logout d-flex align-items-center"
-        (click)="logout()"
-        title="Logout"
-      >
-        <i class="bi bi-box-arrow-right me-2"></i>
-        Logout
-      </button>
+      @if(auth.isAuthenticated()){
+        @if(auth.user().email){
+          <span class="user-email">
+            {{ auth.user().email || '...' }}
+          </span>
+        }
+        <button
+          class="btn btn-logout d-flex align-items-center"
+          (click)="logout()"
+          title="Logout"
+        >
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Logout
+        </button>
+      }
     </div>
   </div>
 </nav>
