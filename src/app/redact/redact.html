@@ -33,7 +33,8 @@
                 />
               </label>
               <p class="text-muted mt-3 small">
-                Supported: PDF, DOC/DOCX, RTF, ODT, TXT, PPT/PPTX, XLS/XLSX
+              <!--Supported: PDF, DOC/DOCX, RTF, ODT, TXT, PPT/PPTX, XLS/XLSX-->
+              Supported: PDF
               </p>
             </div>
           </div>
@@ -82,7 +83,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]="!form.valid || !file()"
+                [disabled]="!form.valid || !file() || isLoading()"
               >
                 Confirm
               </button>

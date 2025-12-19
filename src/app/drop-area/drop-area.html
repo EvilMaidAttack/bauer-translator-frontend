@@ -71,7 +71,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]="!form.valid || !file()"
+                [disabled]="!form.valid || !file() || isLoading()"
               >
                 Confirm
               </button>

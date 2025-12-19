@@ -1,6 +1,8 @@
-import { Component, ElementRef, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth';
+
+declare const bootstrap: any;
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +18,10 @@ export class Navigation {
   activeLeft = 0;
   activeWidth = 0;
 
+  @ViewChild('mobileNav') mobileNav!: ElementRef;
+
   logout() {
+    this.closeMobileNav();
     this.auth.logout();
     this.router.navigate(['/login']);
   }
@@ -35,4 +40,21 @@ export class Navigation {
       this.activeWidth = active.offsetWidth;
     }
   }
+
+  openMobileNav(){
+    const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(
+      this.mobileNav.nativeElement,
+      {
+        backdrop: true,
+        scroll: false
+      }
+    );
+    offcanvas.show()
+  }
+
+  closeMobileNav(){
+    const offcanvas = bootstrap.Offcanvas.getInstance(this.mobileNav.nativeElement);
+    offcanvas?.hide();
+  }
+
 }

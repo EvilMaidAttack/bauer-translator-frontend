@@ -23,8 +23,8 @@ export class BackendUser {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly baseUrl = "https://b-translator-prod.azurewebsites.net/";
-  //private readonly baseUrl = "http://localhost:8000/";
+  //private readonly baseUrl = "https://b-translator-prod.azurewebsites.net/";
+  private readonly baseUrl = "http://localhost:8000/";
   private _user = signal<BackendUser>({
     loggedIn: !!localStorage.getItem('access'),
     accessToken: localStorage.getItem('access') ?? "",

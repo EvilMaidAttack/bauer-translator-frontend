@@ -6,50 +6,95 @@
     </a>
 
     @if(auth.isAuthenticated()){
-      <!-- Left navigation links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-nav">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/translate"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <i class="bi bi-translate me-1"></i>
-            Translation
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/redact"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <i class="bi bi-pencil-square me-1"></i>
-            Redaction
-          </a>
-        </li>
-      </ul>
+      <!-- Hamburger button (only on small screens) -->
+       <button 
+          class = "navbar-toggler"
+          type = "button"
+          (click)="openMobileNav()"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
     }
 
-    <!-- Right Side -->
-    <div class="d-flex ms-auto align-items-center">
+    <!-- Desktop Navigation -->
+    <div class="collapse navbar-collapse d-none d-lg-flex">
       @if(auth.isAuthenticated()){
-        @if(auth.user().email){
-          <span class="user-email">
-            {{ auth.user().email || '...' }}
-          </span>
-        }
-        <button
-          class="btn btn-logout d-flex align-items-center"
-          (click)="logout()"
-          title="Logout"
-        >
-          <i class="bi bi-box-arrow-right me-2"></i>
-          Logout
-        </button>
+        <!-- Left navigation links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-nav">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/translate"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-translate me-1"></i>
+              Translation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/redact"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-pencil-square me-1"></i>
+              Redaction
+            </a>
+          </li>
+        </ul>
       }
+      <!-- Right Side -->
+      <div class="d-flex ms-auto align-items-center">
+        @if(auth.isAuthenticated()){
+          @if(auth.user().email){
+            <span class="user-email">
+              {{ auth.user().email || '...' }}
+            </span>
+          }
+          <button
+            class="btn btn-logout d-flex align-items-center"
+            (click)="logout()"
+            title="Logout"
+          >
+            <i class="bi bi-box-arrow-right me-2"></i>
+            Logout
+          </button>
+        }
+      </div>
     </div>
   </div>
 </nav>
+
+<div #mobileNav class="offcanvas offcanvas-end" tabindex="-1">
+  <div class="offcanvas header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close text-reset" routerLinkActive="active" (click)="closeMobileNav()"></button>
+  </div>
+  <div class="offcanvas-body">
+        <ul class="navbar-nav mb-3">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/translate" routerLinkActive="active" (click)="closeMobileNav()">
+          <i class="bi bi-translate me-2"></i> Translation
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/redact" routerLinkActive="active" (click)="closeMobileNav()">
+          <i class="bi bi-pencil-square me-2"></i> Redaction
+        </a>
+      </li>
+    </ul>
+
+    <hr />
+
+    <div class="mb-3 text-muted">
+      {{ auth.user().email }}
+    </div>
+
+    <button class="btn btn-logout w-100" (click)="logout()">
+      <i class="bi bi-box-arrow-right me-2"></i> Logout
+    </button>
+  </div>
+</div>
