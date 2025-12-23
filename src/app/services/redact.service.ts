@@ -21,8 +21,8 @@ export interface RedactionJob {
   providedIn: 'root'
 })
 export class RedactService {
-  //private readonly baseUrl = 'https://b-translator-prod.azurewebsites.net/api/';
-  private readonly baseUrl = 'http://localhost:8000/api/';
+  private readonly baseUrl = 'https://b-translator-prod.azurewebsites.net/api/';
+  //private readonly baseUrl = 'http://localhost:8000/api/';
 
   constructor(private http: HttpClient) { }
 
