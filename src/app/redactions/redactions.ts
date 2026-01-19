@@ -2,6 +2,14 @@ import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { RedactService, RedactionJob } from '../services/redact.service';
 import { DatePipe } from '@angular/common';
 
+declare global {
+  interface Window {
+    bootstrap: any;
+  }
+}
+
+
+
 @Component({
   selector: 'app-redactions',
   imports: [DatePipe],
@@ -18,6 +26,7 @@ export class Redactions implements OnInit, OnDestroy {
 
   private tick = signal(Date.now());
   private timerId: any;
+
 
   ngOnInit(): void {
     this.loadRedactions();

@@ -57,15 +57,32 @@
             }
           </div>
 
-          @if (!isExpired(job) && job.download_url) {
-            <a
-              class="btn btn-sm btn-success"
-              [href]="job.download_url"
-              target="_blank"
-              rel="noopener"
-            >
-              <i class="bi bi-download me-1"></i>
-            </a>
+          @if (!isExpired(job)) {
+            <div class="btn-group btn-group-sm gap-2" role="group">
+              @if (job.download_url) {
+                <a
+                  class="btn btn-success"
+                  [href]="job.download_url"
+                  target="_blank"
+                  rel="noopener"
+                  title="Download redacted document"
+                >
+                  <i class="bi bi-download"></i>
+                </a>
+              }
+
+              @if (job.entity_download_url) {
+                <a
+                  class="btn btn-outline-secondary"
+                  [href]="job.entity_download_url"
+                  target="_blank"
+                  rel="noopener"
+                  title="Download entity JSON"
+                >
+                  <i class="bi bi-braces"></i>
+                </a>
+              }
+            </div>
           } @else {
             <span
               class="badge text-bg-danger d-inline-flex align-items-center"

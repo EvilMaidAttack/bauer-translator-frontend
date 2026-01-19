@@ -17,7 +17,7 @@ export class Redact {
   form: any;
 
   readonly accept =
-    '.pdf,.doc,.docx,.rtf,.odt,.txt,.ppt,.pptx,.xls,.xlsx';
+    '.pdf,.doc,.docx,.txt';
 
   isDragging = signal(false);
   private _file = signal<File | null>(null);
@@ -28,7 +28,6 @@ export class Redact {
 
   constructor(private fb: FormBuilder, private redactorService: RedactService) {}
 
-  // TODO: languages not being fetched somehow
   ngOnInit() {
     
     this.form = this.fb.group({

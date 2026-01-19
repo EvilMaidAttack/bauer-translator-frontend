@@ -15,6 +15,8 @@ export interface RedactionJob {
   download_url?: string;
   download_expires_at?: string | null;
   target_name?: string;
+  entity_download_url?: string;
+  entity_expires_at?: string | null;
 }
 
 @Injectable({
